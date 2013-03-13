@@ -1,0 +1,57 @@
+#!/usr/bin/env ruby
+require 'gli'
+begin # XXX: Remove this begin/rescue before distributing your app
+require 'alonzo'
+rescue LoadError
+  STDERR.puts "In development, you need to use `bundle exec bin/alonzo` to run your app"
+  STDERR.puts "At install-time, RubyGems will make sure lib, etc. are in the load path"
+  STDERR.puts "Feel free to remove this message from bin/alonzo now"
+  exit 64
+end
+
+include GLI::App
+
+program_desc 'A commandline butler and confidant'
+
+version Alonzo::VERSION
+
+pre do |global, command, options, args|
+  # Pre logic here
+  # Return true to proceed; false to abort and not call the
+  # chosen command
+  # Use skips_pre before a command to skip this block
+  # on that command only
+  true
+end
+
+desc "Generate rubigen-based templates"
+arg_name 'template_names'
+command :gen do |c|
+  c.action do |global, options, args|
+    #Alonzo::Generator.generate(options[:type], options[:root], args)
+    puts options
+    puts args.inspect
+  end
+
+  c.flag [:r, :root], default_value: Dir.pwd,
+                      arg_name:      'project_root',
+                      desc:          'The root directory for the project'
+
+  c.flag [:t, :type], default_value: :lib, 
+                      arg_name:      'template_type', 
+                      desc:          'The type of template to generate'
+end
+
+post do |global, command, options, args|
+  # Post logic here
+  # Use skips_post before a command to skip this
+  # block on that command only
+end
+
+on_error do |exception|
+  # Error logic here
+  # return false to skip default error handling
+  true
+end
+
+exit run(ARGV)

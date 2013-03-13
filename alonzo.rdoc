@@ -1,0 +1,5 @@
+= alonzo
+
+Generate this with
+    alonzo rdoc
+After you have described your command line interface
