@@ -6,5 +6,6 @@ module Alonzo
   end
 end
 
+require 'alonzo/commands.rb'
+require 'alonzo/generator.rb'
 require 'alonzo/version.rb'
-require_relative 'alonzo/generator'

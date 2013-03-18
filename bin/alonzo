@@ -24,21 +24,19 @@ pre do |global, command, options, args|
   true
 end
 
-desc "Generate rubigen-based templates"
-arg_name 'template_names'
+desc "Generate boilerplate files"
+arg_name 'template_args'
 command :gen do |c|
   c.action do |global, options, args|
-    #Alonzo::Generator.generate(options[:type], options[:root], args)
-    puts options
-    puts args.inspect
+    arguments = { args: args, global: global, options: options }
+    Alonzo::Commands::Gen.run(arguments)
   end
 
-  c.flag [:r, :root], default_value: Dir.pwd,
+  c.flag [:r, :root], default_value: Alonzo::Commands::Gen.defaults[:project_root],
                       arg_name:      'project_root',
                       desc:          'The root directory for the project'
-
-  c.flag [:t, :type], default_value: :lib, 
-                      arg_name:      'template_type', 
+  c.flag [:t, :type], default_value: Alonzo::Commands::Gen.defaults[:template_type],
+                      arg_name:      'template_type',
                       desc:          'The type of template to generate'
 end
 
