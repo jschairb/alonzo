@@ -2,7 +2,7 @@ module Alonzo
   module Commands
     class Gen
       DEFAULTS = {
-        project_root:  Dir.pwd,
+         project_root: Dir.pwd,
         template_type: :rb_class
       }
 
@@ -26,6 +26,7 @@ module Alonzo
       end
 
       def run
+        Generator.generate(args, { output: output, root: options[:root], type: options[:type] })
       end
     end
   end
