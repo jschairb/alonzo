@@ -3,7 +3,8 @@ require 'spec_helper'
 module Alonzo
   describe Generator do
     let(:args)      { ["MyClass"] }
-    let(:generator) { Generator.new(type, root, args) }
+    let(:generator) { Generator.new(args, options) }
+    let(:options)   { { root: root, type: type } }
     let(:root)      { File.join(Alonzo.root, "tmp", "rspec") }
     let(:type)      { :rb_class }
 
@@ -15,28 +16,20 @@ module Alonzo
         expect(generator.args).to eq(args)
       end
 
-      it "sets the root attribute" do
-        expect(generator.root).to eq(root)
+      it "sets the generator class" do
+        expect(generator.generator_class).to eq(Generator::RbClassGenerator)
       end
 
-      it "sets the type attribute" do
-        expect(generator.type).to eq(type)
+      it "sets the output attribute, by default" do
+        expect(generator.output).to eq(STDOUT)
+      end
+
+      it "sets the root attribute" do
+        expect(generator.root).to eq(root)
       end
     end
 
     describe "#generate" do
-      context "when type = :lib" do
-        it "generates a class file"
-
-        it "generates a spec file"
-      end
-    end
-
-    describe "#templates_path" do
-      it "returns the path to the templates" do
-        templates_path = File.join(Alonzo.root, "lib", "alonzo", "templates", "rb_class_templates")
-        expect(generator.templates_path).to eq(templates_path)
-      end
     end
   end
 end
