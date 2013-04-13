@@ -10,7 +10,15 @@ spec = Gem::Specification.new do |s|
   s.summary = 'Your command-line butler and confidant'
 # Add your other files here if you make them
   s.files = %w(
+Gemfile
+Gemfile.lock
+README.rdoc
+Rakefile
+alonzo.gemspec
+alonzo.rdoc
 bin/alonzo
+lib/alonzo/commands/gen.rb
+lib/alonzo/commands.rb
 lib/alonzo/generator.rb
 lib/alonzo/version.rb
 lib/alonzo.rb
